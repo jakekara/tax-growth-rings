@@ -36,6 +36,10 @@ line.rad_line{
     opacity: 0;
 }
 
+text{
+    text-shadow:0 0 2px white;
+}
+
 .old text{
     opacity: 0;
 }

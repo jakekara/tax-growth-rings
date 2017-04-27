@@ -29,8 +29,7 @@ var setup = function(){
     g = svg.append("g");
 
     year_pills = container.append("div")
-	.classed("pill-
-wrapper", true)
+	.classed("pill-wrapper", true)
 	.append("div")
 	.classed("pillbox", true);
 
@@ -151,14 +150,14 @@ var draw_all_circles = function(d, all_d){
 
 
     // add year label
-    gs.append("text")
+    var toplabel = gs.append("text")
 	.classed("clabel", true)
 	.attr("x", center()[0])
 	.attr("y", center()[1] - 3)
 	.text(function(d){
     	    return "receipts: $" + Math.round(d[val_col] / 100) / 10 + " billion"
 	});
-	      // .text(function(d){ return d[year_col];});;
+    // .text(function(d){ return d[year_col];});;
 
     var vlabel = gs.append("text")
 	.classed("clabel", true)
@@ -166,7 +165,11 @@ var draw_all_circles = function(d, all_d){
 	.classed("val_label", true)
 	.attr("x", center()[0])
     	.text(function(d){
+
 	    var fmt = numeral(d[growth_col]).format("$0,0");
+	    
+	    if (Number(d[growth_col]) < 0)
+		fmt = numeral(d[growth_col]).format("$0,0.0");
 	    // console.log(d[growth_col], Number(d[growth_col]), fmt, numeral(d[growth_col]).format("0.0"), d);
 
 
@@ -226,7 +229,7 @@ var draw = function(d){
 	.on("click",function(d){
 	    highlight_year(d[year_col]);
 	})
-    	.on("hover",function(d){
+    	.on("mouseover",function(d){
 	    highlight_year(d[year_col]);
 	});
 
