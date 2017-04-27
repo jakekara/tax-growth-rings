@@ -1,0 +1,68 @@
+/* body { */
+/*     font-family: 'Lato', sans-serif; */
+/* } */
+
+/* svg text { */
+/*     font-size: 12px; */
+/*     fill: gray; */
+/* } */
+
+.old circle{
+    opacity: 0.3;
+    stroke-width: 1;
+}
+
+circle{
+    stroke: black;
+}
+
+ circle {
+    stroke-width: 2;
+}
+
+circle.neg{
+    stroke: red;
+}
+
+line.rad_line{
+    stroke: black;
+}
+
+.old line.rad_line{
+    opacity: 0;
+}
+
+.old text{
+    opacity: 0;
+}
+
+.clear-both{
+    clear: both;
+}
+
+.pillbox{
+    margin-right: auto;
+    margin-left: auto;
+		     
+}
+
+.pill{
+    float: left;
+    background-color: #ebebeb;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.pill.neg.highlight{
+    background-color: lightsalmon;
+}
+
+.pill.highlight{
+    background-color: palegreen;;
+}
+
+.pill.highlight{
+    
+}
