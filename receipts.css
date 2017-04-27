@@ -14,7 +14,7 @@
 }
 
 circle{
-    stroke: gray;
+    stroke: palegreen;
     fill: white;
     fill-opacity: 0.5;
 }
@@ -24,7 +24,7 @@ circle{
 }
 
 circle.neg{
-    stroke: red;
+    stroke: lightsalmon;
 }
 
 line.rad_line{
