@@ -14,6 +14,8 @@
 
 circle{
     stroke: black;
+    fill: white;
+    fill-opacity: 0.5;
 }
 
  circle {
@@ -25,7 +27,8 @@ circle.neg{
 }
 
 line.rad_line{
-    stroke: black;
+    stroke: #aaa;
+    stroke-width: 0.8;
 }
 
 .old line.rad_line{
@@ -36,11 +39,20 @@ line.rad_line{
     opacity: 0;
 }
 
+.neg text.change_label {
+    fill: red;
+}
+
 .clear-both{
     clear: both;
 }
 
+
+.pill-wrapper{
+    text-align: center;
+}
 .pillbox{
+    display: inline-block;
     margin-right: auto;
     margin-left: auto;
 		     

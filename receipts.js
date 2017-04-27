@@ -29,7 +29,9 @@ var setup = function(){
     g = svg.append("g");
 
     year_pills = container.append("div")
-    .classed("pillbox", true);
+	.classed("pill-wrapper", true)
+	.append("div")
+	.classed("pillbox", true);
 
 
 }
@@ -102,23 +104,39 @@ var draw_all_circles = function(d, all_d){
     
     var gs = circles.enter()
 	.append("g")
-.classed("cgroup", true)
+	.classed("cgroup", true)
+    	.classed("neg", function(a){
+	    return Math.round(Number(a[growth_col]) < 0 );
+	})
+
         .attr("data-year", function(a){ return a[year_col];});
     
-    gs.append("circle")
+    var circles = gs.append("circle")
     	.attr("data-year", function(a){ return a[year_col];})
 	.attr("cx", center()[0])
 	.attr("cy", center()[1])
-	.style("fill","none")
+	// .style("fill","none")
 	.style("new", true)
-	.attr("r", function(a){
+	.attr("r", function(a, i){
 	    return rscale(all_d)(a[val_col]);
+	    // if ( a[growth_col].length == 0 )
+	    // 	return 0;
+
+	    // return rscale(all_d)(d[i-1][val_col]);
+	    // return rscale(all_d)(prev);
 	})
+    // .transition().duration(500).attr("r", function(a){
+    // 	return rscale(all_d)(a[val_col]);
+    // })
 	.classed("neg", function(a){
 	    return Math.round(Number(a[growth_col]) < 0 );
 	})
 	.merge(circles);
 
+    // d3.selectAll("circle:not(.old)").transition().duration(500).attr("r", function(a){
+    // 	return rscale(all_d)(a[val_col]);
+    // })
+    
     // draw radius line
     gs.append("line")
     	.attr("data-year", function(a){ return a[year_col];})
@@ -136,14 +154,24 @@ var draw_all_circles = function(d, all_d){
 	.classed("clabel", true)
 	.attr("x", center()[0])
 	.attr("y", center()[1] - 3)
-	.text(function(d){ return d[year_col];});
+	.text(function(d){
+    	    return "receipts: $" + Math.round(d[val_col] / 100) / 10 + " billion"
+	});
+	      // .text(function(d){ return d[year_col];});;
 
     var vlabel = gs.append("text")
 	.classed("clabel", true)
+	.classed("change_label", true)
 	.classed("val_label", true)
 	.attr("x", center()[0])
     	.text(function(d){
-	    return "$" + Math.round(d[val_col] / 100) / 10 + " billion";
+	    var fmt = numeral(d[growth_col]).format("$0,0.0");
+	    console.log(d[growth_col], Number(d[growth_col]), fmt, numeral(d[growth_col]).format("0.0"), d);
+
+
+	    if (Number(d[growth_col]) ==  0) return "";
+	    
+	    return "change: " + fmt + " million";
 	})
 
     vlabel
@@ -196,7 +224,11 @@ var draw = function(d){
 	})
 	.on("click",function(d){
 	    highlight_year(d[year_col]);
+	})
+    	.on("hover",function(d){
+	    highlight_year(d[year_col]);
 	});
+
 
     year_pills.append("div")
 	.classed("clear-both", true);
